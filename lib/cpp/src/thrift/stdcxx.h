@@ -102,6 +102,7 @@ namespace apache { namespace thrift { namespace stdcxx {
   using ::boost::enable_shared_from_this;
   using ::boost::make_shared;
   using ::boost::scoped_ptr;
+  using ::boost::scoped_array;
   using ::boost::shared_ptr;
   using ::boost::static_pointer_cast;
   using ::boost::weak_ptr;
@@ -113,6 +114,7 @@ namespace apache { namespace thrift { namespace stdcxx {
   using ::std::enable_shared_from_this;
   using ::std::make_shared;
   template <typename T> using scoped_ptr = std::unique_ptr<T>;		// compiler must support template aliasing
+  template <typename T> using scoped_array = std::unique_ptr<T[]>;      // compiler must support template aliasing
   using ::std::shared_ptr;
   using ::std::static_pointer_cast;
   using ::std::weak_ptr;

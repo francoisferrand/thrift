@@ -436,7 +436,7 @@ void TFileTransport::writerThread() {
 
             uint8_t* zeros = new uint8_t[padding];
             memset(zeros, '\0', padding);
-            boost::scoped_array<uint8_t> array(zeros);
+            stdcxx::scoped_array<uint8_t> array(zeros);
             if (-1 == ::write(fd_, zeros, padding)) {
               int errno_copy = THRIFT_ERRNO;
               GlobalOutput.perror("TFileTransport: writerThread() error while padding zeros ",
