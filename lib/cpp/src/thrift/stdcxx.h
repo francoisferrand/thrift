@@ -89,6 +89,12 @@
 
 #if defined(BOOST_NO_CXX11_SMART_PTR) || (defined(_MSC_VER) && _MSC_VER < 1800) || defined(FORCE_BOOST_SMART_PTR)
 #include <boost/smart_ptr.hpp>
+#include <boost/version.hpp>
+#if (BOOST_VERSION >= 105700)
+#include <boost/move/unique_ptr.hpp>
+#else
+#include <boost/interprocess/smart_ptr/unique_ptr.hpp>
+#endif
 #else
 #include <memory>
 #endif
@@ -107,6 +113,12 @@ namespace apache { namespace thrift { namespace stdcxx {
   using ::boost::static_pointer_cast;
   using ::boost::weak_ptr;
 
+#if (BOOST_VERSION >= 105700)
+  using ::boost::movelib::unique_ptr;
+#else
+  using ::boost::interprocess::unique_ptr;
+#endif
+
 #else
 
   using ::std::const_pointer_cast;
@@ -118,6 +130,7 @@ namespace apache { namespace thrift { namespace stdcxx {
   using ::std::shared_ptr;
   using ::std::static_pointer_cast;
   using ::std::weak_ptr;
+  using ::std::unique_ptr;
 
 #endif
 
