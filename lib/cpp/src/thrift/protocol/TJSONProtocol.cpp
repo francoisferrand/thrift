@@ -20,8 +20,6 @@
 #include <thrift/protocol/TJSONProtocol.h>
 
 #include <boost/locale.hpp>
-#include <boost/math/special_functions/fpclassify.hpp>
-#include <boost/math/special_functions/sign.hpp>
 
 #include <cmath>
 #include <limits>
@@ -32,6 +30,21 @@
 #include <thrift/protocol/TBase64Utils.h>
 #include <thrift/transport/TTransportException.h>
 #include <thrift/TToString.h>
+
+#if __cplusplus < 201103L
+#include <boost/math/special_functions/fpclassify.hpp>
+#include <boost/math/special_functions/sign.hpp>
+#endif
+
+namespace apache { namespace thrift { namespace stdcxx {
+#if __cplusplus < 201103L
+  using ::boost::math::fpclassify;
+  using ::boost::math::signbit;
+#else
+  using ::std::fpclassify;
+  using ::std::signbit;
+#endif
+}}} // namespace apache::thrift::stdcxx
 
 using namespace apache::thrift::transport;
 
@@ -539,9 +552,9 @@ uint32_t TJSONProtocol::writeJSONDouble(double num) {
   std::string val;
 
   bool special = false;
-  switch (boost::math::fpclassify(num)) {
+  switch (stdcxx::fpclassify(num)) {
   case FP_INFINITE:
-    if (boost::math::signbit(num)) {
+    if (stdcxx::signbit(num)) {
       val = kThriftNegativeInfinity;
     } else {
       val = kThriftInfinity;
