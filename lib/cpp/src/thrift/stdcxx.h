@@ -123,4 +123,31 @@ namespace apache { namespace thrift { namespace stdcxx {
 
 }}} // apache::thrift::stdcxx
 
+///////////////////////////////////////////////////////////////////
+//
+// Atomic
+//
+///////////////////////////////////////////////////////////////////
+
+#if (!defined(_MSC_VER) && __cplusplus < 201103L) || (defined(_MSC_VER) && _MSC_VER < 1700)
+#include <boost/atomic.hpp>
+#define _THRIFT_USE_BOOST_ATOMIC_ 1
+#else
+#include <atomic>
+#endif
+
+namespace apache { namespace thrift { namespace stdcxx {
+
+#if _THRIFT_USE_BOOST_ATOMIC_
+
+  using ::boost::atomic;
+
+#else
+
+  using ::std::atomic;
+
+#endif
+
+}}} // apache::thrift::stdcxx
+
 #endif // #ifndef _THRIFT_STDCXX_H_
