@@ -163,4 +163,17 @@ namespace apache { namespace thrift { namespace stdcxx {
 
 }}} // apache::thrift::stdcxx
 
+///////////////////////////////////////////////////////////////////
+//
+// Static Assert
+//
+///////////////////////////////////////////////////////////////////
+
+#if (!defined(_MSC_VER) && __cplusplus < 201103L) || (defined(_MSC_VER) && _MSC_VER < 1600)
+#include <boost/static_assert.hpp>
+#define THRIFT_STATIC_ASSERT(_x) BOOST_STATIC_ASSERT(_x)
+#else
+#define THRIFT_STATIC_ASSERT(_x) static_assert((_x), #_x)
+#endif
+
 #endif // #ifndef _THRIFT_STDCXX_H_

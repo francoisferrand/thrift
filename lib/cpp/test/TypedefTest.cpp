@@ -18,11 +18,11 @@
  */
 
 #include <boost/type_traits/is_same.hpp>
-#include <boost/static_assert.hpp>
+#include <thrift/stdcxx.h>
 
 #include "gen-cpp/TypedefTest_types.h"
 
-BOOST_STATIC_ASSERT((boost::is_same<int32_t, thrift::test::MyInt32>::value));
-BOOST_STATIC_ASSERT((boost::is_same<std::string, thrift::test::MyString>::value));
-BOOST_STATIC_ASSERT(
+THRIFT_STATIC_ASSERT((boost::is_same<int32_t, thrift::test::MyInt32>::value));
+THRIFT_STATIC_ASSERT((boost::is_same<std::string, thrift::test::MyString>::value));
+THRIFT_STATIC_ASSERT(
     (boost::is_same<thrift::test::TypedefTestStruct, thrift::test::MyStruct>::value));
