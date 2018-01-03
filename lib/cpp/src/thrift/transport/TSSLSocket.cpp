@@ -35,6 +35,9 @@
 #ifdef HAVE_FCNTL_H
 #include <fcntl.h>
 #endif
+#ifdef HAVE_UNISTD_H
+#include <unistd.h>
+#endif
 
 #define OPENSSL_VERSION_NO_THREAD_ID_BEFORE    0x10000000L
 #define OPENSSL_ENGINE_CLEANUP_REQUIRED_BEFORE 0x10100000L
